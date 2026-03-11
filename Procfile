@@ -1,0 +1,1 @@
+worker: python monitor_advisor_bot.py
