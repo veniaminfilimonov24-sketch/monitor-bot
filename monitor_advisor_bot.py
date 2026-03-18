@@ -97,11 +97,13 @@ def generate_links_block(model_name: str) -> str:
 
 def append_market_links(reply: str) -> str:
     """Находит модели мониторов в ответе и добавляет блок ссылок."""
-    matches = MODEL_PATTERN.findall(reply)
+    # Убираем markdown разметку перед поиском
+    clean_text = re.sub(r'\*+', '', reply)
+    
+    matches = MODEL_PATTERN.findall(clean_text)
     if not matches:
         return reply
 
-    # Убираем дубли, берём первые 3 модели
     seen = set()
     unique_models = []
     for brand, model in matches:
